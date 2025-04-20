@@ -1,24 +1,67 @@
-import { useState } from 'react';
-// import { v4 as uuidv4 } from 'uuid';
+import { useState, useEffect } from 'react';
+import { DndContext } from '@dnd-kit/core';
+import BoardSidebar from './BoardSidebar';
+import BoardContent from './BoardContent';
 
 export default function App() {
+  const [boards, setBoards] = useState([]);
+  const [activeBoard, setActiveBoard] = useState(null);
+
+  // localStorage load.
+  useEffect(() => {
+    const saved = localStorage.getItem('boards');
+    if (saved) {
+      setBoards(JSON.parse(saved));
+      setActiveBoard(JSON.parse(saved)[0]?.id || null);
+    }
+  }, []);
+
+  // localStorage save.
+  useEffect(() => {
+    localStorage.setItem('boards', JSON.stringify(boards));
+  }, [boards]);
+
+  const createBoard = () => {
+    const newBoard = {
+      id: crypto.randomUUID(),
+      name: `Board ${boards.length + 1}`,
+      columns: []
+    };
+    setBoards([...boards, newBoard]);
+  };
+
+  const updateBoard = (id, newName) => {
+    setBoards(boards.map(board => 
+      board.id === id ? { ...board, name: newName } : board
+    ));
+  };
+
+  const deleteBoard = (id) => {
+    setBoards(boards.filter(board => board.id !== id));
+    if (activeBoard === id) setActiveBoard(null);
+  };
 
   return (
-    <>
-      <header className="header">
-        WIP
-      </header>
-
-      <content id="content">
-        WIP
-      </content>
-
-      {}
-      <footer className="footer">
-        WIP
-        <br></br>
-        Lorem ipsum dolor sit amet!
-      </footer>
-    </>
+    <DndContext>
+      <div className="container">
+        <BoardSidebar 
+          boards={boards}
+          activeBoard={activeBoard}
+          setActiveBoard={setActiveBoard}
+          createBoard={createBoard}
+          updateBoard={updateBoard}
+          deleteBoard={deleteBoard}
+        />
+        
+        {activeBoard && boards.some(b => b.id === activeBoard) ? (
+          <BoardContent 
+            board={boards.find(b => b.id === activeBoard)} 
+            setBoards={setBoards}
+          />
+        ) : (
+          <div>:P</div>
+        )}
+      </div>
+    </DndContext>
   );
 }

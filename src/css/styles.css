@@ -49,3 +49,7 @@
   padding: 10px;
   border-radius: 5px;
 }
+
+.draggable {
+  touch-action: none;
+}
