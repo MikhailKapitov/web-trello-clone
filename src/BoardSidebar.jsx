@@ -13,7 +13,7 @@ export default function BoardSidebar({ boards, activeBoard, setActiveBoard, crea
             value={board.name} 
             onChange={(e) => updateBoard(board.id, e.target.value)}
           />
-          <button className="deletion-button" onClick={() => deleteBoard(board.id)}>
+          <button className="deletion-button" onClick={(e) => {e.stopPropagation(); deleteBoard(board.id);}}>
             Delete
           </button>
         </div>
