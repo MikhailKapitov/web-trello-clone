@@ -7,12 +7,11 @@ export default function BoardSidebar({ boards, activeBoard, setActiveBoard, crea
       </div>
       
       {boards.map(board => (
-        <div key={board.id} className={`card board-card ${activeBoard === board.id ? 'board-active' : 'board-inactive'}`}>
+        <div key={board.id} className={`card board-card ${activeBoard === board.id ? 'board-active' : 'board-inactive'}`} onClick={() => setActiveBoard(board.id)}>
           <input 
             type="text" 
             value={board.name} 
             onChange={(e) => updateBoard(board.id, e.target.value)}
-            onFocus={() => setActiveBoard(board.id)}
           />
           <button className="deletion-button" onClick={() => deleteBoard(board.id)}>
             Delete
