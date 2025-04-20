@@ -2,6 +2,15 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --primary-color: darkcyan;
+  --text-color: #ffffff;
+  --border-radius: 8px;
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --hover-color: rgba(255, 255, 255, 0.1);
 }
 
 .container {
@@ -10,14 +19,159 @@
 }
 
 .board-sidebar {
-  width: 200px;
-  background-color: darkcyan;
-  color: white;
+  width: 250px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
   padding: 20px;
   position: sticky;
   top: 0;
   height: 100vh;
   overflow-y: auto;
+  box-shadow: var(--shadow);
+}
+
+.boards-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.creation-button {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  font-family: Arial;
+}
+
+.creation-button:hover {
+  background-color: var(--hover-color);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.board-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.board-card:hover {
+  background-color: var(--hover-color);
+  transform: translateX(5px);
+}
+
+.board-card input {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 1rem;
+  width: 80%;
+  padding: 4px 0;
+}
+
+.board-card input:focus {
+  outline: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.board-card input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.deletion-button {
+  background-color: rgba(201, 21, 21, 0.6); 
+  color: var(--text-color);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.deletion-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 1;
+}
+
+.board-active {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-left: 3px solid white;
+}
+
+.board-inactive {
+  opacity: 0.8;
+}
+
+.board-inactive:hover {
+  opacity: 1;
+}
+
+/* Scrollbar styling for sidebar */
+.board-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.board-sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.board-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.board-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive Design for sidebar */
+@media screen and (max-width: 768px) {
+  .board-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .boards-heading {
+    font-size: 1.1rem;
+  }
+  
+  .creation-button {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  
+  .board-card {
+    padding: 10px;
+  }
+  
+  .board-card input {
+    font-size: 0.9rem;
+  }
 }
 
 .board-content {
@@ -48,8 +202,4 @@
   background-color: #f0f0f0;
   padding: 10px;
   border-radius: 5px;
-}
-
-.draggable {
-  touch-action: none;
 }
