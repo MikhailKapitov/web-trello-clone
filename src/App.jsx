@@ -11,8 +11,9 @@ export default function App() {
   useEffect(() => {
     const saved = localStorage.getItem('boards');
     if (saved) {
-      setBoards(JSON.parse(saved));
-      setActiveBoard(JSON.parse(saved)[0]?.id || null);
+      const parsed = JSON.parse(saved);
+      setBoards(parsed);
+      setActiveBoard(parsed[0]?.id || null);
     }
   }, []);
 

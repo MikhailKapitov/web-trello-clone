@@ -10,7 +10,10 @@ export default function Task({ task, columnId, boardId, setBoards }) {
     transform,
     transition,
     isDragging
-  } = useSortable({ id: task.id });
+  } = useSortable({
+      id: task.id,
+      data: { type: 'task' },
+    });
 
   const priority_mapping = ['Low', 'Medium', 'High'];
 
@@ -83,7 +86,7 @@ export default function Task({ task, columnId, boardId, setBoards }) {
       
       <button 
         className="deletion-button" 
-        onClick={() => deleteTask(task.id)}
+        onClick={() => deleteTask()}
       >
         Delete
       </button>

@@ -17,11 +17,14 @@ export default function BoardContent({ board, setBoards }) {
 
   const handleDragStart = (event) => {
     const { active } = event;
-    setActiveDragItem(active);
+    setActiveDragItem({
+      id: active.id,
+      type: active.data.current?.type,
+    });
   };
 
   const handleDragEnd = (event) => {
-    // console.log(activeDragItem?.data?.current?.sortable?.items[0]);
+    // console.log(activeDragItem);
     const { active, over } = event;
     setActiveDragItem(null);
     
@@ -135,23 +138,15 @@ export default function BoardContent({ board, setBoards }) {
           </div>
         </SortableContext>
         <DragOverlay>
-          {activeDragItem?.data?.current?.sortable?.items && 
-            activeDragItem?.data?.current?.sortable?.items.length > 0 &&
-            board.columns.flatMap(column => column.tasks).some(task => 
-              task.id === activeDragItem?.data?.current?.sortable?.items[0]
-            ) && (
-              <div>
-                {board.columns.flatMap(column => column.tasks)
-                  .filter(task => task.id === activeDragItem?.data?.current?.sortable?.items[0])
-                  .map(task => (
-                    <div key={task.id} className="draggable-task">
-                      <h4>{task.title}</h4>
-                      <p>{task.description}</p>
-                    </div>
-                  ))
-                }
+          {activeDragItem?.type === 'task' && (() => {
+            const task = board.columns.flatMap(col => col.tasks).find(t => t.id === activeDragItem.id);
+            return task ? (
+              <div className="draggable-task">
+                <h4>{task.title}</h4>
+                <p>{task.description}</p>
               </div>
-          )}
+            ) : null;
+          })()}
         </DragOverlay>
       </DndContext>
     </div>
