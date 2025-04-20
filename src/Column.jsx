@@ -68,7 +68,7 @@ export default function Column({ column, boardId, setBoards }) {
   return (
     <div className="card column-card" ref={setNodeRef} {...attributes} style={style}>
       <div className="heading column-heading">
-        <div className="drag-handle draggable" {...listeners}>#</div>
+        <div className="drag-handle draggable" {...listeners}>⋮</div>
         <input 
           type="text" 
           value={column.name} 

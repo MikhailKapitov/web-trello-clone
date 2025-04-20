@@ -140,11 +140,11 @@ export default function BoardContent({ board, setBoards }) {
             board.columns.flatMap(column => column.tasks).some(task => 
               task.id === activeDragItem?.data?.current?.sortable?.items[0]
             ) && (
-              <div className="draggable-task">
+              <div>
                 {board.columns.flatMap(column => column.tasks)
                   .filter(task => task.id === activeDragItem?.data?.current?.sortable?.items[0])
                   .map(task => (
-                    <div key={task.id}>
+                    <div key={task.id} className="draggable-task">
                       <h4>{task.title}</h4>
                       <p>{task.description}</p>
                     </div>

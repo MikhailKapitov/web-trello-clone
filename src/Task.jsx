@@ -57,7 +57,7 @@ export default function Task({ task, columnId, boardId, setBoards }) {
       {...attributes}
       style={style}
     >
-      <a {...listeners} className="draggable"> # </a>
+      <a {...listeners} className="draggable"> ⋮ </a>
       <button 
         className="completion-button" 
         onClick={() => updateTask('completed', !task.completed)}
