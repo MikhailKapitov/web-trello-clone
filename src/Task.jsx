@@ -74,7 +74,7 @@ export default function Task({ task, columnId, boardId, setBoards }) {
         onChange={(e) => updateTask('title', e.target.value)}
       />
       
-      <input
+      <textarea
         type="text"
         value={task.description}
         onChange={(e) => updateTask('description', e.target.value)}
