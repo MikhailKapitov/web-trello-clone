@@ -44,7 +44,12 @@ export default function BoardContent({ board, setBoards }) {
 
     const activeId = active.id;
     const overId = over.id;
-    if (activeId === overId) return;
+    if (activeId === overId){
+      console.log(over);
+      console.log("Nah.")
+      return;
+    }
+
 
     let sourceColumn, sourceIndex;
     for (const column of board.columns) {

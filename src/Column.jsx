@@ -1,22 +1,29 @@
-import { useDroppable, DragOverlay } from '@dnd-kit/core';
+import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import Task from './Task';
 
 export default function Column({ column, boardId, setBoards }) {
-  
+  // 1) Make the column card itself draggable/sortable
   const {
-      attributes,
-      listeners,
-      setNodeRef,
-      transform,
-      transition,
-      isDragging
-    } = useSortable({
-      id: column.id,
-      data: { type: 'column' },
-    });
+    attributes,
+    listeners,
+    setNodeRef: setColumnRef,
+    transform,
+    transition,
+    isDragging
+  } = useSortable({
+    id: column.id,
+    data: { type: 'column' },
+  });
 
+  // 2) ALSO make the tasks-list area droppable, even if it's empty
+  const {
+    setNodeRef: setTasksListRef
+  } = useDroppable({
+    id: column.id,
+    data: { type: 'column' },     // same type so your handleDragEnd sees it as a column
+  });
 
   const updateColumn = (newName) => {
     setBoards(prev => prev.map(board => 
@@ -65,8 +72,14 @@ export default function Column({ column, boardId, setBoards }) {
     opacity: isDragging ? 0.5 : 1,
   };
 
+
   return (
-    <div className="card column-card" ref={setNodeRef} {...attributes} style={style}>
+    <div 
+      className="card column-card"
+      ref={setColumnRef}   // column is still sortable
+      {...attributes}
+      style={style}
+    >
       <div className="heading column-heading">
         <div className="drag-handle draggable" {...listeners}>⋮</div>
         <input 
@@ -80,8 +93,9 @@ export default function Column({ column, boardId, setBoards }) {
         </button>
       </div>
 
-      <SortableContext items={column.tasks.map(task => task.id)}>
-        <div className="tasks-list">
+      {/* 3) attach the droppable ref here */}
+      <div className="tasks-list" ref={setTasksListRef}>
+        <SortableContext items={column.tasks.map(task => task.id)}>
           {column.tasks.map(task => (
             <Task 
               key={task.id}
@@ -91,8 +105,8 @@ export default function Column({ column, boardId, setBoards }) {
               setBoards={setBoards}
             />
           ))}
-        </div>
-      </SortableContext>
+        </SortableContext>
+      </div>
     </div>
   );
 }
