@@ -409,3 +409,12 @@ margin-left: 88%;
   background-position: center;
   min-height: 100vh;
 }
+
+.boardless-board{
+  background-image: url('/src/images/tralalero-tralala-size_834x556.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  width: 100%;
+}

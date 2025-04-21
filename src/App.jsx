@@ -60,7 +60,7 @@ export default function App() {
             setBoards={setBoards}
           />
         ) : (
-          <div>:P</div>
+          <div className="boardless-board">:P</div>
         )}
       </div>
     </DndContext>
