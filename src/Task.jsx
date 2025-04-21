@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { autosizeDescriptions } from './description-autoresizer';
 
 export default function Task({ task, columnId, boardId, setBoards }) {
+
+  useEffect(() => {
+    autosizeDescriptions();
+  }, []); 
+
   const {
     attributes,
     listeners,
@@ -75,7 +81,7 @@ export default function Task({ task, columnId, boardId, setBoards }) {
       />
       
       <textarea
-        type="text"
+        className="autosized-description"
         value={task.description}
         onChange={(e) => updateTask('description', e.target.value)}
       />
