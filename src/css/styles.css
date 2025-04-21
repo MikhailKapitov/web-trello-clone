@@ -149,14 +149,14 @@
 }
 
 
-.board-content {
+/*.board-content {
   flex: 1;
-  padding: 20px;
+  padding: 0px;
   background-color: white;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-}
+}*/
 
 .columns-heading {
   display: flex;
@@ -188,7 +188,7 @@ just for devide
 
 .board-content {
   flex: 1;
-  padding: 20px;
+  padding: 0px;
   background-color:  #0e2b2b;
   background-image: 
    radial-gradient(at 47% 33%, hsl(216, 77%, 40%) 0, transparent 59%), 
@@ -233,6 +233,8 @@ just for devide
 }
 
 .column-card {
+  margin-left: 10px;
+  margin-right: 10px;
   background-color:rgba(0, 139, 139, 0.2);
   padding: 12px;
   border-radius: 12px;
@@ -404,6 +406,7 @@ margin-left: 88%;
 }
 
 .container {
+  display: flex;
   background-image: url('/images/tralalero-tralala-size_834x556.jpg');
   background-size: cover;
   background-repeat: no-repeat;
