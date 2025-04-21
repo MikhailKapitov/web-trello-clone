@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { DndContext } from '@dnd-kit/core';
 import BoardSidebar from './BoardSidebar';
 import BoardContent from './BoardContent';
 
@@ -32,7 +31,7 @@ export default function App() {
   };
 
   const updateBoard = (id, newName) => {
-    setBoards(boards.map(board => 
+    setBoards(boards.map(board =>
       board.id === id ? { ...board, name: newName } : board
     ));
   };
@@ -43,26 +42,24 @@ export default function App() {
   };
 
   return (
-    <DndContext>
-      <div className="container">
-        <BoardSidebar 
-          boards={boards}
-          activeBoard={activeBoard}
-          setActiveBoard={setActiveBoard}
-          createBoard={createBoard}
-          updateBoard={updateBoard}
-          deleteBoard={deleteBoard}
+    <div className="container">
+      <BoardSidebar 
+        boards={boards}
+        activeBoard={activeBoard}
+        setActiveBoard={setActiveBoard}
+        createBoard={createBoard}
+        updateBoard={updateBoard}
+        deleteBoard={deleteBoard}
+      />
+
+      {activeBoard && boards.some(b => b.id === activeBoard) ? (
+        <BoardContent 
+          board={boards.find(b => b.id === activeBoard)} 
+          setBoards={setBoards}
         />
-        
-        {activeBoard && boards.some(b => b.id === activeBoard) ? (
-          <BoardContent 
-            board={boards.find(b => b.id === activeBoard)} 
-            setBoards={setBoards}
-          />
-        ) : (
-          <div className="boardless-board">:P</div>
-        )}
-      </div>
-    </DndContext>
+      ) : (
+        <div className="boardless-board">:P</div>
+      )}
+    </div>
   );
 }

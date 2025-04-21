@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { DndContext, closestCorners, KeyboardSensor, PointerSensor, useSensor, useSensors, DragOverlay } from '@dnd-kit/core';
-import { sortableKeyboardCoordinates, arrayMove, SortableContext } from '@dnd-kit/sortable';
+import { sortableKeyboardCoordinates, arrayMove, SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable';
 import Column from './Column';
 import Task from './Task'
 
@@ -9,11 +9,14 @@ export default function BoardContent({ board, setBoards }) {
   const [activeDragItem, setActiveDragItem] = useState(null);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 1 }
+    }),
     useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
+      coordinateGetter: sortableKeyboardCoordinates
     })
   );
+
 
   const handleDragStart = (event) => {
     const { active } = event;
@@ -130,7 +133,7 @@ export default function BoardContent({ board, setBoards }) {
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <SortableContext items={board.columns.map(col => col.id)}>
+        <SortableContext items={board.columns.map(col => col.id)} strategy={horizontalListSortingStrategy}>
           <div className="columns-wrapper">
             {board?.columns.map((column) => (
               <Column
