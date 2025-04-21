@@ -4,7 +4,7 @@ import { CSS } from '@dnd-kit/utilities';
 import Task from './Task';
 
 export default function Column({ column, boardId, setBoards }) {
-  // 1) Make the column card itself draggable/sortable
+
   const {
     attributes,
     listeners,
@@ -17,12 +17,12 @@ export default function Column({ column, boardId, setBoards }) {
     data: { type: 'column' },
   });
 
-  // 2) ALSO make the tasks-list area droppable, even if it's empty
+
   const {
     setNodeRef: setTasksListRef
   } = useDroppable({
     id: column.id,
-    data: { type: 'column' },     // same type so your handleDragEnd sees it as a column
+    data: { type: 'column' },
   });
 
   const updateColumn = (newName) => {
@@ -76,7 +76,7 @@ export default function Column({ column, boardId, setBoards }) {
   return (
     <div 
       className="card column-card"
-      ref={setColumnRef}   // column is still sortable
+      ref={setColumnRef}
       {...attributes}
       style={style}
     >
@@ -93,7 +93,6 @@ export default function Column({ column, boardId, setBoards }) {
         </button>
       </div>
 
-      {/* 3) attach the droppable ref here */}
       <div className="tasks-list" ref={setTasksListRef}>
         <SortableContext items={column.tasks.map(task => task.id)}>
           {column.tasks.map(task => (
