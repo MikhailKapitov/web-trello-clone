@@ -19,6 +19,7 @@
 }
 
 .board-sidebar {
+  flex: 0 0 250px;
   width: 250px;
   background-color: var(--primary-color);
   color: var(--text-color);
@@ -433,4 +434,12 @@ margin-left: 88%;
 textarea.autosized-description{
   resize: none;
   overflow:hidden;
+}
+
+.drag-handle {
+  cursor: move;
+  margin: 5px;
+}
+.draggable{
+  cursor: move;
 }
