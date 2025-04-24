@@ -8,18 +8,25 @@ export default function App() {
 
   // localStorage load.
   useEffect(() => {
-    const saved = localStorage.getItem('boards');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      setBoards(parsed);
-      setActiveBoard(parsed[0]?.id || null);
-    }
-  }, []);
+      const savedBoards = localStorage.getItem('boards');
+      const savedActiveBoard = localStorage.getItem('activeBoard');
+      
+      if (savedBoards) {
+        const parsedBoards = JSON.parse(savedBoards);
+        setBoards(parsedBoards);
+        setActiveBoard(savedActiveBoard || null);
+      }
+    }, []);
 
-  // localStorage save.
-  useEffect(() => {
-    localStorage.setItem('boards', JSON.stringify(boards));
-  }, [boards]);
+    // localStorage save.
+    useEffect(() => {
+      localStorage.setItem('boards', JSON.stringify(boards));
+    }, [boards]);
+    useEffect(() => {
+      if (activeBoard !== null) {
+        localStorage.setItem('activeBoard', activeBoard);
+      }
+    }, [activeBoard]);
 
   const createBoard = () => {
     const newBoard = {
