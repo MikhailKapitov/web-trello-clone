@@ -447,3 +447,52 @@ textarea.autosized-description{
 .draggable{
   cursor: move;
 }
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .board-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    box-shadow: none;
+    padding: 10px;
+    flex: 0 0 150px;
+  }
+
+  .board-content {
+    padding: 10px;
+  }
+
+  .columns-wrapper {
+    flex-direction: column;
+    overflow-x: hidden;
+    gap: 12px;
+  }
+
+  .column-card {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .task-card {
+    font-size: 0.9rem;
+  }
+
+  .creation-button {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+
+  .task-card .completion-button {
+    margin-left: auto;
+  }
+
+  .container, .boardless-board {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat;
+  }
+}
